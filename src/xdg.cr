@@ -9,19 +9,19 @@ end
 
 def env_list_of_paths?(name) : Array(Path)?
   if (paths = ENV[name]?) && !paths.empty?
-    paths.split ':'
+    paths.split(':').map &->Path.new(String)
   end
 end
 
 module XDG
   module DATA
     HOME = (envpath? "XDG_DATA_HOME") || Path.home / ".local" / "share"
-    DIRS = (env_list_of_paths? "XDG_DATA_DIRS") || ["/usr/local/share/", "/usr/share/"]
+    DIRS = (env_list_of_paths? "XDG_DATA_DIRS") || ["/usr/local/share/", "/usr/share/"].map &->Path.new(String)
   end
 
   module CONFIG
     HOME = (envpath? "XDG_CONFIG_HOME") || Path.home / ".config"
-    DIRS = (env_list_of_paths? "XDG_CONFIG_DIRS") || ["/etc/xdg"]
+    DIRS = (env_list_of_paths? "XDG_CONFIG_DIRS") || [Path.new "/etc/xdg"]
   end
 
   module CACHE
