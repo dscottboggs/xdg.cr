@@ -9,7 +9,7 @@ Constants representing the XDG config locations or their standard defaults if no
    ```yaml
    dependencies:
      xdg:
-       github: dscottboggs/xdg
+       github: dscottboggs/xdg.cr
    ```
 
 2. Run `shards install`
