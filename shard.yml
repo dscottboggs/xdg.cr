@@ -4,6 +4,6 @@ version: 0.1.0
 authors:
   - Scott Boggs scott@tams.tech
 
-crystal: 0.35.1
+crystal: ">= 0.35.1, < 2.0.0"
 
 license: MIT
