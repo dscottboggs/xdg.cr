@@ -2,8 +2,8 @@ name: xdg
 version: 0.1.0
 
 authors:
-  - your-name-here <your-email-here>
+  - Scott Boggs scott@tams.tech
 
-crystal: 0.35.1
+crystal: ">= 0.35.1, < 2.0.0"
 
 license: MIT
