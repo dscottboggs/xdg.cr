@@ -16,7 +16,7 @@ end
 module XDG
   module DATA
     HOME = (envpath? "XDG_DATA_HOME") || Path.home / ".local" / "share"
-    DIRS = (env_list_of_paths? "XDG_DATA_DIRS") || ["/usr/local/share/", "/usr/share/"].map &->Path.new(String)
+    DIRS = (env_list_of_paths? "XDG_DATA_DIRS") || [Path["/usr/local/share/"], Path["/usr/share/"]]
   end
 
   module CONFIG
