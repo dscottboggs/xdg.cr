@@ -31,4 +31,8 @@ module XDG
   module RUNTIME
     DIR = envpath? "XDG_RUNTIME_DIR"
   end
+
+  module STATE
+    HOME = (envpath? "XDG_STATE_HOME") || Path.home / ".local" / "state"
+  end
 end
