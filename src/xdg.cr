@@ -35,4 +35,18 @@ module XDG
   module STATE
     HOME = (envpath? "XDG_STATE_HOME") || Path.home / ".local" / "state"
   end
+
+  extend self
+
+  def data_file(name : Path | String) : Path?
+    ([DATA::HOME] & DATA::DIRS).first? do |dir|
+      File.exists? dir / name
+    end.try &./ name
+  end
+
+  def config_file(name : Path | String) : Path?
+    ([CONFIG::HOME] & CONFIG::DIRS).first? do |dir|
+      File.exists? dir / name
+    end.try &./ name
+  end
 end

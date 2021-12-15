@@ -19,7 +19,7 @@ Constants representing the XDG config locations or their standard defaults if no
 ```crystal
 require "xdg"
 
-File.open XDG::CONFIG::HOME / "myapp" / "config.yml", mode: "w" do |config|
+File.open XDG.config_file("myapp") / "config.yml", mode: "w" do |config|
   myapp_config.to_yaml config
 end
 ```
