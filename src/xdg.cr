@@ -39,13 +39,13 @@ module XDG
   extend self
 
   def data_file(name : Path | String) : Path?
-    ([DATA::HOME] & DATA::DIRS).first? do |dir|
+    ([DATA::HOME] | DATA::DIRS).find do |dir|
       File.exists? dir / name
     end.try &./ name
   end
 
   def config_file(name : Path | String) : Path?
-    ([CONFIG::HOME] & CONFIG::DIRS).first? do |dir|
+    ([CONFIG::HOME] | CONFIG::DIRS).find do |dir|
       File.exists? dir / name
     end.try &./ name
   end
