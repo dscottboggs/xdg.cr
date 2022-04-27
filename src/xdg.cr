@@ -1,17 +1,5 @@
 # XDG standard values
-
-def envpath?(name) : Path?
-  if set = ENV[name]?
-    return if set.empty?
-    Path.new set
-  end
-end
-
-def env_list_of_paths?(name) : Array(Path)?
-  if (paths = ENV[name]?) && !paths.empty?
-    paths.split(':').map &->Path.new(String)
-  end
-end
+require "./helpers"
 
 module XDG
   module DATA
@@ -21,7 +9,7 @@ module XDG
 
   module CONFIG
     HOME = (envpath? "XDG_CONFIG_HOME") || Path.home / ".config"
-    DIRS = (env_list_of_paths? "XDG_CONFIG_DIRS") || [Path.new "/etc/xdg"]
+    DIRS = (env_list_of_paths? "XDG_CONFIG_DIRS") || [Path["/etc/xdg"]]
   end
 
   module CACHE
@@ -35,18 +23,17 @@ module XDG
   module STATE
     HOME = (envpath? "XDG_STATE_HOME") || Path.home / ".local" / "state"
   end
+end
 
-  extend self
-
-  def data_file(name : Path | String) : Path?
-    ([DATA::HOME] | DATA::DIRS).find do |dir|
-      File.exists? dir / name
-    end.try &./ name
+private def envpath?(name) : Path?
+  if set = ENV[name]?
+    return if set.empty?
+    Path.new set
   end
+end
 
-  def config_file(name : Path | String) : Path?
-    ([CONFIG::HOME] | CONFIG::DIRS).find do |dir|
-      File.exists? dir / name
-    end.try &./ name
+private def env_list_of_paths?(name) : Array(Path)?
+  if (paths = ENV[name]?) && !paths.empty?
+    paths.split(':').map &->Path.new(String)
   end
 end
