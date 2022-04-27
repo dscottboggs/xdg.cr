@@ -58,6 +58,8 @@ module XDG
     end
   end
 
+  # Open a cache file if it exists in $XDG_CACHE_HOME, otherwise create it.
+  # Reads happen from the beggining of the file.
   def cache_file(name : Path | String, *, binary = false, mode = nil, & : File -> T) forall T
     File.open CACHE::HOME / name, mode: mode || "a#{'b' if binary}+" do |file|
       yield file
